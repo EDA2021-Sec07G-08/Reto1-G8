@@ -26,8 +26,11 @@
 
 
 import config as cf
+import time
 from DISClib.ADT import list as lt
 from DISClib.Algorithms.Sorting import shellsort as sa
+from DISClib.Algorithms.Sorting import insertionsort as ins
+from DISClib.Algorithms.Sorting import selectionsort as ss
 assert cf
 
 """
@@ -37,10 +40,16 @@ los mismos.
 
 # Construccion de modelos
 
-def AddVideosLarge(videoslarge):
+def AddVideosLargeLinked(videoslarge):
 
     videoslargelt = lt.newList(datastructure= 'SINGLE_LINKED',
                              filename= videoslarge)
+    return videoslargelt
+
+def AddVideosLargeArray(videoslarge):
+
+    videoslargelt = lt.newList(datastructure ='ARRAY_LIST',
+                            filename = videoslarge)
     return videoslargelt
 
 def AddVideosSmall(videossmall):
@@ -63,3 +72,38 @@ def addTagCategoryID(category_id):
 # Funciones utilizadas para comparar elementos dentro de una lista
 
 # Funciones de ordenamiento
+
+def cmpVideosByViews(video1, video2):
+    """
+    Devuelve verdadero (True) si los 'views' de video1 son menores que los del video2
+    Args:
+    video1: informacion del primer video que incluye su valor 'views'
+    video2: informacion del segundo video que incluye su valor 'views'
+    """
+    return(int(video1['views']) < int(video2['views']))
+
+def sortsubList(catalog, size):
+
+    sub_list = lt.subList(catalog, 0, size) 
+    sub_list = sub_list.copy()
+    return sub_list 
+
+def ordenarCatalogo(catalog, tipo):
+
+    if tipo == 'selection':
+        start_time = time.process_time()
+        sorted_list = ss.sort(catalog, cmpVideosByViews)
+        stop_time = time.process_time()
+        elapsed_time_mseg = (stop_time - start_time)*1000 
+    elif tipo == 'insertion':
+        start_time = time.process_time()
+        sorted_list = ins.sort(catalog, cmpVideosByViews)
+        stop_time = time.process_time()
+        elapsed_time_mseg = (stop_time - start_time)*1000 
+    elif tipo == 'shell':
+        start_time = time.process_time()
+        sorted_list = sa.sort(catalog, cmpVideosByViews)
+        stop_time = time.process_time()
+        elapsed_time_mseg = (stop_time - start_time)*1000 
+    
+    return sorted_list, elapsed_time_mseg

@@ -36,15 +36,20 @@ operación solicitada
 
 def printMenu():
     print("Bienvenido")
-    print("1- Cargar información Videos-Large")
-    print("2- Cargar informacion Videos-Small")
+    print("1- Cargar información Videos-Large (Array_List o Linked_List)")
+    print("2- Ordenar los videos por vistas")
     print("3- Cargar informacion Category_ID")
+    print('4- Hacer una sublista')
 
 catalog = None
 
-def loadVideosLarge():
+def loadVideosLargeLinked():
 
-    return controller.loadVideosLarge("videos/videos-large.csv")
+    return controller.loadVideosLargeLinked("videos/videos-large.csv")
+
+def loadVideosLargeArray():
+
+    return controller.loadVideosLargeArray("videos/videos-large.csv")
 
 def loadVideosSmall():
 
@@ -53,6 +58,11 @@ def loadVideosSmall():
 def loadCategoryID():
 
     return controller.loadCategoryID("videos/category-id.csv")
+
+def ordenarCatalogo(catalog, tipo):
+
+    return controller.ordenarCatalogo(catalog, tipo)
+
 """
 Menu principal
 """
@@ -60,17 +70,30 @@ while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
+        funcion = input(str('Array List o Linked List\n'))
         print("Cargando información de los archivos ....")
-        videos = loadVideosLarge()
-        print("Total de videos cargados: "+ str(lt.size(videos)))
+        if funcion == 'Array List':
+            catalog = loadVideosLargeArray()
+        elif funcion == 'Linked List':
+            catalog = loadVideosLargeLinked()
+        else:
+            print('El tipo de datastructure es incorrecto, intente de nuevo')
+        print("Total de videos cargados: "+ str(lt.size(catalog)))
     elif int(inputs[0]) == 2:
-        print("Cargando información de los archivos ....")
-        videos = loadVideosSmall()
-        print("Total de videos cargados "+ str(lt.size(videos)))
-    elif int(inputs[0] == 3):
+        tipo = input('Seleccione el tipo de ordenamiento (selection, insertion o shell) \n')
+        size = input('Ingrese el tamaño de la muestra: \n')
+        ans = controller.sortsubList(catalog, int(size))
+        respuesta = ordenarCatalogo(ans, tipo)
+        print("Para la muestra de", size, " elementos, el tiempo (mseg) es: ",
+                                          str(respuesta[1]))
+    elif int(inputs[0]) == 3:
         print("Cargando informacion de los archivos ....")
         videos = loadCategoryID()
         print("Total de categorias: "+ str(lt.size(videos)))
+    elif int(inputs[0]) == 4:
+        size = input('Ingrese el tamaño de la muestra: \n')
+        result = controller.sortsubList(catalog, int(size))
+        print(result)
     else:
         sys.exit(0)
 sys.exit(0)

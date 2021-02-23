@@ -32,10 +32,15 @@ El controlador se encarga de mediar entre la vista y el modelo.
 # Inicialización del Catálogo de libros
 
 # Funciones para la carga de datos
-def loadVideosLarge(filename):
+def loadVideosLargeLinked(filename):
 
     videoslarge = cf.data_dir + filename
-    return model.AddVideosLarge(videoslarge)
+    return model.AddVideosLargeLinked(videoslarge)
+
+def loadVideosLargeArray(filename):
+
+    videoslarge = cf.data_dir + filename
+    return model.AddVideosLargeArray(videoslarge)
 
 def loadVideosSmall(filename):
 
@@ -48,5 +53,13 @@ def loadCategoryID(filename):
     return model.addTagCategoryID()
 
 # Funciones de ordenamiento
+
+def sortsubList(catalog, size):
+
+    return model.sortsubList(catalog, size)
+
+def ordenarCatalogo(catalog, tipo):
+
+    return model.ordenarCatalogo(catalog, tipo)
 
 # Funciones de consulta sobre el catálogo
