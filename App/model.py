@@ -31,6 +31,8 @@ from DISClib.ADT import list as lt
 from DISClib.Algorithms.Sorting import shellsort as sa
 from DISClib.Algorithms.Sorting import insertionsort as ins
 from DISClib.Algorithms.Sorting import selectionsort as ss
+from DISClib.Algorithms.Sorting import mergesort as mgs
+from DISClib.Algorithms.Sorting import quicksort as qks
 assert cf
 
 """
@@ -82,6 +84,10 @@ def cmpVideosByViews(video1, video2):
     """
     return(int(video1['views']) < int(video2['views']))
 
+def cmpVideosByViewsLessorEqual(video1, video2):
+
+    return(int(video1['views']) <= int(video2['views']))
+
 def sortsubList(catalog, size):
 
     sub_list = lt.subList(catalog, 0, size) 
@@ -105,5 +111,15 @@ def ordenarCatalogo(catalog, tipo):
         sorted_list = sa.sort(catalog, cmpVideosByViews)
         stop_time = time.process_time()
         elapsed_time_mseg = (stop_time - start_time)*1000 
-    
+    elif tipo == 'merge':
+        start_time = time.process_time()
+        sorted_list = mgs.sort(catalog, cmpVideosByViews)
+        stop_time = time.process_time()
+        elapsed_time_mseg = (stop_time - start_time)*1000
+    elif tipo == 'quick':
+        start_time = time.process_time()
+        sorted_list = qks.sort(catalog, cmpVideosByViewsLessorEqual)
+        stop_time = time.process_time()
+        elapsed_time_mseg = (stop_time - start_time)*1000
+
     return sorted_list, elapsed_time_mseg

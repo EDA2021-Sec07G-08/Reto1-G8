@@ -80,7 +80,7 @@ while True:
             print('El tipo de datastructure es incorrecto, intente de nuevo')
         print("Total de videos cargados: "+ str(lt.size(catalog)))
     elif int(inputs[0]) == 2:
-        tipo = input('Seleccione el tipo de ordenamiento (selection, insertion o shell) \n')
+        tipo = input('Seleccione el tipo de ordenamiento (selection, insertion, shell, quick o merge) \n')
         size = input('Ingrese el tamaño de la muestra: \n')
         ans = controller.sortsubList(catalog, int(size))
         respuesta = ordenarCatalogo(ans, tipo)
