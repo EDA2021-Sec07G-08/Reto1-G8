@@ -40,6 +40,7 @@ def printMenu():
     print("2- Ordenar los videos por vistas")
     print("3- Cargar informacion Category_ID")
     print('4- Hacer una sublista')
+    print("5 - Requerimiento 1")
 
 catalog = None
 
@@ -62,6 +63,10 @@ def loadCategoryID():
 def ordenarCatalogo(catalog, tipo):
 
     return controller.ordenarCatalogo(catalog, tipo)
+
+def ordenarpaisycat(num, pais, category_id, catalog):
+
+    return controller.ordenarpaisycat(num, pais, category_id, catalog)
 
 """
 Menu principal
@@ -94,6 +99,13 @@ while True:
         size = input('Ingrese el tamaño de la muestra: \n')
         result = controller.sortsubList(catalog, int(size))
         print(result)
+    elif int(inputs[0]) == 5:
+        num = input('Ingrese el numero de videos que se desean conocer')
+        pais = input('Ingrese el nombre del pais')
+        category_id = input('Ingrese el nombre de la categoria')
+
+        ans = ordenarpaisycat(num, pais, category_id, catalog)
+        print(ans)
     else:
         sys.exit(0)
 sys.exit(0)

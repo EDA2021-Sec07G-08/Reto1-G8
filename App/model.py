@@ -60,10 +60,11 @@ def AddVideosSmall(videossmall):
                                 filename = videossmall)
     return videossmalllt
 
-def addTagCategoryID(category_id):
+def loadCategoryID(category_id):
 
     category_idlt = lt.newList(datastructure= 'SINGLE_LINKED',
                                 filename = category_id)
+    return category_idlt
 
 # Funciones para agregar informacion al catalogo
 
@@ -71,11 +72,50 @@ def addTagCategoryID(category_id):
 
 # Funciones de consulta
 
+def ordenarpaisycat(num, pais, category_id, catalog):
+
+    lista = catalog['elements']
+
+    temp = lt.newList(datastructure='ARRAY_LIST')
+
+    ans = []
+
+    j = 1
+
+    for i in range(0, len(lista)):
+        lista_temporal = lista[i]
+        if int(lista_temporal['category_id']) == int(category_id) and lista_temporal['country'] == pais:
+            lt.addLast(temp, lista_temporal)
+            
+    sorted_list = mgs.sort(temp, cmpVideosByViewsMore)
+
+    while j <= int(num):
+        ans.append(lt.getElement(sorted_list, j))
+        j += 1
+
+    respuesta = []
+
+    for i in range (len(ans)):
+        diccionario = {}
+        dict1 = ans[i]
+        diccionario['trending_date'] = dict1['trending_date']
+        diccionario['title'] = dict1['title']
+        diccionario['channel_title'] = dict1['channel_title']
+        diccionario['publish_time'] = dict1['publish_time']
+        diccionario['views'] = dict1['views']
+        diccionario['likes'] = dict1['likes']
+        diccionario['dislikes'] = dict1['dislikes']
+        respuesta.append(diccionario)
+
+    return respuesta
+
+
+
 # Funciones utilizadas para comparar elementos dentro de una lista
 
 # Funciones de ordenamiento
 
-def cmpVideosByViews(video1, video2):
+def cmpVideosByViewsLess(video1, video2):
     """
     Devuelve verdadero (True) si los 'views' de video1 son menores que los del video2
     Args:
@@ -83,6 +123,10 @@ def cmpVideosByViews(video1, video2):
     video2: informacion del segundo video que incluye su valor 'views'
     """
     return(int(video1['views']) < int(video2['views']))
+
+def cmpVideosByViewsMore(video1, video2):
+
+    return(int(video1['views'])) > int(video2['views'])
 
 def cmpVideosByViewsLessorEqual(video1, video2):
 

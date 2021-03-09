@@ -50,7 +50,7 @@ def loadVideosSmall(filename):
 def loadCategoryID(filename):
 
     category_id = cf.data_dir + filename
-    return model.addTagCategoryID()
+    return model.loadCategoryID(category_id)
 
 # Funciones de ordenamiento
 
@@ -63,3 +63,7 @@ def ordenarCatalogo(catalog, tipo):
     return model.ordenarCatalogo(catalog, tipo)
 
 # Funciones de consulta sobre el catálogo
+
+def ordenarpaisycat(num, pais, category_id, catalog):
+
+    return model.ordenarpaisycat(num, pais, category_id, catalog)
