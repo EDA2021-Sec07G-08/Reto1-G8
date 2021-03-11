@@ -36,11 +36,14 @@ operación solicitada
 
 def printMenu():
     print("Bienvenido")
-    print("1- Cargar información Videos-Large (Array_List o Linked_List)")
+    print("1- Cargar información")
     print("2- Ordenar los videos por vistas")
     print("3- Cargar informacion Category_ID")
     print('4- Hacer una sublista')
     print("5 - Requerimiento 1")
+    print('6 - Requerimiento 2')
+    print("7 - Requerimiento 3")
+    print("8 - Requerimiento 4")
 
 catalog = None
 
@@ -64,9 +67,17 @@ def ordenarCatalogo(catalog, tipo):
 
     return controller.ordenarCatalogo(catalog, tipo)
 
-def ordenarpaisycat(num, pais, category_id, catalog):
+def ordenarpaisycat(num, pais, category_id, catalog, categories):
 
-    return controller.ordenarpaisycat(num, pais, category_id, catalog)
+    return controller.ordenarpaisycat(num, pais, category_id, catalog, categories)
+
+def mastendenciacat(category_name, catalog, categories):
+
+    return controller.mastendenciacat(category_name, catalog, categories)
+
+def ordenarviewstag(tag, catalog, cantidad):
+
+    return controller.ordenarviewstag(tag, catalog, cantidad)
 
 """
 Menu principal
@@ -79,11 +90,16 @@ while True:
         print("Cargando información de los archivos ....")
         if funcion == 'Array List':
             catalog = loadVideosLargeArray()
+            categories = loadCategoryID()
         elif funcion == 'Linked List':
             catalog = loadVideosLargeLinked()
+            categories = loadCategoryID()
         else:
             print('El tipo de datastructure es incorrecto, intente de nuevo')
         print("Total de videos cargados: "+ str(lt.size(catalog)))
+        lt = catalog['elements'][0]
+        print(lt)
+        print(categories)
     elif int(inputs[0]) == 2:
         tipo = input('Seleccione el tipo de ordenamiento (selection, insertion, shell, quick o merge) \n')
         size = input('Ingrese el tamaño de la muestra: \n')
@@ -100,11 +116,23 @@ while True:
         result = controller.sortsubList(catalog, int(size))
         print(result)
     elif int(inputs[0]) == 5:
-        num = input('Ingrese el numero de videos que se desean conocer')
-        pais = input('Ingrese el nombre del pais')
-        category_id = input('Ingrese el nombre de la categoria')
-
-        ans = ordenarpaisycat(num, pais, category_id, catalog)
+        num = input('Ingrese el numero de videos que se desean conocer: ')
+        pais = input('Ingrese el nombre del pais: ')
+        category_id = input('Ingrese el nombre de la categoria: ')
+        ans = ordenarpaisycat(num, pais, category_id, catalog, categories)
+        print(ans)
+    elif int(inputs[0]) == 6:
+        pais = input('Ingrese el nombre del pais: ')
+        trending_video = controller.Requerimiento2(catalog,pais)
+        print(trending_video[0]["title"]," " *10 ,trending_video[0]["channel_title"]," "*10,trending_video[0]["country"]," "*10,trending_video[1])
+    elif int(inputs[0]) == 7:
+        category_name = input('Ingrese el nombre de la categoria: ')
+        ans = mastendenciacat(category_name, catalog, categories)
+        print(ans)
+    elif int(inputs[0]) == 8:
+        tag = input('Ingrese el tag que desea buscar: ')
+        cantidad = int(input('Ingrese el numero de videos que desea conocer: '))
+        ans = ordenarviewstag(tag, catalog, cantidad)
         print(ans)
     else:
         sys.exit(0)
