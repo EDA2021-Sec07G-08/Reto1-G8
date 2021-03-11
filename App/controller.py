@@ -64,6 +64,17 @@ def ordenarCatalogo(catalog, tipo):
 
 # Funciones de consulta sobre el catálogo
 
-def ordenarpaisycat(num, pais, category_id, catalog):
+def ordenarpaisycat(num, pais, category_id, catalog, categories):
 
-    return model.ordenarpaisycat(num, pais, category_id, catalog)
+    return model.ordenarpaisycat(num, pais, category_id, catalog, categories)
+
+def mastendenciacat(category_name, catalog, categories):
+
+    return model.mastendenciacat(category_name, catalog, categories)
+
+def ordenarviewstag(tag, catalog, cantidad):
+
+    return model.ordenarviewstag(tag, catalog, cantidad)
+
+def Requerimiento2(catalog,pais):
+    return model.Requerimiento2(catalog,pais)
