@@ -110,7 +110,6 @@ while True:
     elif int(inputs[0]) == 3:
         print("Cargando informacion de los archivos ....")
         videos = loadCategoryID()
-        print("Total de categorias: "+ str(lt.size(videos)))
     elif int(inputs[0]) == 4:
         size = input('Ingrese el tamaño de la muestra: \n')
         result = controller.sortsubList(catalog, int(size))

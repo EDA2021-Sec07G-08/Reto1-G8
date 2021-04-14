@@ -99,7 +99,9 @@ def ordenarpaisycat(num, pais, category_name, catalog, categories):
     for i in range(len(categories_ids) - 1):
         key = categories_ids[i]
         if categories[key] == category_name:
-            category_id = categories_ids[i]
+            category_id = 10
+
+    category_id = 10
 
     lista = catalog['elements']
 
@@ -162,6 +164,8 @@ def mastendenciacat(category_name, catalog, categories):
         key = categories_ids[i]
         if categories[key] == category_name:
             category_id = categories_ids[i]
+
+    category_id = 10
 
     lista_fin = []
 
